@@ -1,0 +1,30 @@
+{% extends "juegos/base.html" %}
+
+{% block title %}Editar Juego{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 shadow-sm">
+            <h4 class="mb-3 text-center">Editar Juego</h4>
+            <form action="{% url 'actualizar_juego' juego.id %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="titulo" class="form-label font-weight-bold">Nombre / Título</label>
+                    <!-- name="titulo" para que coincida con el título del juego -->
+                    <input type="text" id="titulo" name="titulo" class="form-control" value="{{ juego.titulo }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label font-weight-bold">Precio / Créditos</label>
+                    <!-- name="precio" para que coincida con el precio del juego -->
+                    <input type="number" id="precio" name="precio" class="form-control" value="{{ juego.precio }}" min="0" step="0.01" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary fw-bold">Actualizar</button>
+                    <a href="{% url 'lista_juegos' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
